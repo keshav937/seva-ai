@@ -1,0 +1,6 @@
+{
+  "name": "SEVA AI",
+  "description": "AI-powered Smart City Services, Civic Intelligence, Public Safety, and Emergency Response Platform for Indian Cities.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

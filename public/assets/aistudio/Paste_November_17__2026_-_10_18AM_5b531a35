@@ -1,0 +1,3039 @@
+SEVA AI — SMART CITY INTELLIGENCE & EMERGENCY RESPONSE ECOSYSTEM
+
+Tagline: One City. One Platform. Infinite Possibilities. A Safer Tomorrow.
+
+MASTER PROJECT INSTRUCTION
+
+Act as a world-class full-stack development team consisting of senior software engineers, AI engineers, product designers, cybersecurity specialists, geospatial engineers, database architects, API integration specialists and QA engineers.
+
+Build a completely new, production-oriented, full-stack web application named SEVA AI.
+
+SEVA AI is an AI-powered Smart City Services, Civic Intelligence, Public Safety and Emergency Response Platform designed for Indian cities.
+
+This must be a real, fully functional application with an integrated frontend, backend, database, authentication, APIs, real-time services, GPS, SMS, email and external integrations.
+
+Do not build a static website, presentation, UI-only prototype or theoretical dashboard.
+
+Every feature must have a real implementation, meaningful backend functionality and appropriate error handling.
+
+The website should demonstrate how technology can connect citizens, police, hospitals, ambulance services, caregivers and municipal authorities through a unified platform.
+
+The final product must be visually impressive, intuitive, responsive, secure, reliable and genuinely functional.
+
+PART 1 — PRODUCT IDENTITY AND VISION
+
+SEVA AI stands for a smarter, safer and more responsive urban ecosystem.
+
+The platform addresses major city challenges:
+
+Damaged roads and potholes.
+
+Garbage accumulation and waste management.
+
+Blocked drainage and waterlogging.
+
+Traffic congestion and road obstructions.
+
+Road accidents.
+
+Medical emergencies.
+
+Women and child safety.
+
+Crime and unsafe public locations.
+
+Core product philosophy
+
+Report once, reach the right authority.
+
+Every emergency deserves a timely response.
+
+Every citizen deserves a safer city.
+
+Every verified report contributes to civic improvement.
+
+Technology should simplify public services.
+
+Core workflow
+
+CITIZEN → REPORT → AI ANALYSIS → LIVE LOCATION → SMART ROUTING → AUTHORITY RESPONSE → CITIZEN TRACKING → RESOLUTION.
+
+SEVA AI must operate as a connected ecosystem in which citizens can report problems, authorities can see and resolve them, and citizens can transparently track every update.
+
+PART 2 — VISUAL DESIGN AND BRANDING
+
+Create a premium, elegant, recognizable product identity.
+
+The design must be simple, modern, professional, attractive and extremely easy to use.
+
+Design direction
+
+Use a premium civic technology aesthetic.
+
+Suggested visual palette:
+
+Primary: Deep forest green.
+
+Secondary: Emerald.
+
+Background: Soft white.
+
+Surface: Light neutral grey.
+
+Accent: Warm amber for warnings.
+
+Emergency: Clearly recognizable red.
+
+Typography: Modern, clean and readable.
+
+Avoid excessive gradients, neon colors, unnecessary animations, crowded cards and complicated navigation.
+
+Use:
+
+Beautiful typography.
+
+Consistent spacing.
+
+Elegant icons.
+
+Subtle shadows.
+
+Rounded but professional components.
+
+Clean cards.
+
+Smooth transitions.
+
+Clear visual hierarchy.
+
+Accessible colors.
+
+Large touch targets.
+
+Brand experience
+
+Create a professional SEVA AI logo and a recognizable visual identity.
+
+The landing page should communicate:
+
+"Your City. Your Voice. Your Safety."
+
+Create an attractive hero section with:
+
+SEVA AI branding.
+
+A short, meaningful description.
+
+Get Started button.
+
+Explore Services button.
+
+A visually engaging city-service illustration or actual application screenshot.
+
+Clear service highlights.
+
+Do not make the landing page excessively long.
+
+PART 3 — COMPLETE AUTHENTICATION AND OTP SYSTEM
+
+Create two separate account types:
+
+Citizen.
+
+Authority.
+
+Both must have independent login flows and dashboards.
+
+A. Citizen registration and login
+
+Provide:
+
+Full name.
+
+Email address.
+
+Indian mobile number.
+
+Password.
+
+Confirm password.
+
+Phone OTP verification.
+
+Email OTP verification.
+
+Login using phone and OTP.
+
+Login using email and password.
+
+Forgot password.
+
+Password reset.
+
+Secure logout.
+
+B. Random OTP generation — mandatory
+
+Implement a fully functional server-side OTP generation and verification system.
+
+Requirements:
+
+Generate a cryptographically secure random OTP whenever verification is requested.
+
+Never use a fixed, predictable or hardcoded OTP.
+
+Generate a separate OTP challenge for each verification request.
+
+Store OTP challenges securely on the backend.
+
+Set a configurable expiry time.
+
+Implement resend cooldown.
+
+Limit verification attempts.
+
+Invalidate an OTP after successful verification.
+
+Prevent OTP reuse.
+
+Prevent abuse through rate limiting.
+
+Handle expired and incorrect OTPs properly.
+
+Provide clear verification feedback.
+
+Website-visible OTP for development and testing
+
+I specifically require the generated OTP to be visible on the website during development/testing so the entire login and verification workflow can be tested without depending on an external SMS provider.
+
+Implement two clearly separated modes:
+
+DEVELOPMENT / TEST MODE
+
+Generate a new random OTP on the backend.
+
+Display the generated OTP in a clearly labelled testing panel on the verification screen.
+
+Display it only for the current test session and intended test account.
+
+Allow the user to copy the OTP.
+
+Verify it against the server-side challenge.
+
+Show expiry and resend countdown.
+
+Do not use a permanently fixed OTP.
+
+Never expose OTPs belonging to another user.
+
+PRODUCTION MODE
+
+Send the generated OTP through the actual SMS provider to the user's registered mobile number.
+
+Send email OTPs through the configured email provider.
+
+Do not expose the production OTP in frontend responses, browser logs, public APIs or the verification screen.
+
+Verify the OTP securely on the backend.
+
+The application must automatically respect its configured environment mode. Never allow a production user to activate development OTP display through a frontend setting.
+
+C. Actual SMS and email verification
+
+Integrate an actual SMS provider such as MSG91 or Twilio.
+
+Integrate an actual email provider such as Resend or SendGrid.
+
+When a citizen enters their mobile number:
+
+Validate the Indian mobile number.
+
+Generate a random OTP.
+
+Send the OTP to that number.
+
+Display a confirmation that the SMS request was accepted by the provider.
+
+Allow OTP verification.
+
+Update phone verification status only after successful verification.
+
+When a citizen enters their email:
+
+Generate a separate random OTP.
+
+Send it to the registered email.
+
+Verify it independently.
+
+Update email verification status only after successful verification.
+
+Do not show "OTP sent successfully" unless the provider confirms successful acceptance.
+
+Show useful error messages when delivery fails.
+
+D. Authority login
+
+Provide a dedicated Authority Login page.
+
+Fields:
+
+Official email or registered mobile number.
+
+Password.
+
+OTP verification where configured.
+
+Forgot password.
+
+Secure logout.
+
+Authority accounts must be created or verified through a secure authority onboarding process. Do not grant authority access merely because someone selects "Authority" on a registration form.
+
+Important dashboard requirement: Do not create a separate authority permission-request, permission-approval or report-access approval feature inside the Authority Dashboard. Once an authorized authority user successfully logs in, the user must be able to see all citizen-submitted reports in the central Authority Dashboard.
+
+Do not hide citizen reports behind department approval or permission-request screens.
+
+E. Forgot password
+
+Allow password recovery using a verified email or phone authentication flow.
+
+F. Security
+
+Implement:
+
+Secure sessions.
+
+Password hashing.
+
+Server-side authentication.
+
+Protected API routes.
+
+Rate limiting.
+
+Session expiration.
+
+Account recovery.
+
+Secure OTP storage.
+
+Authentication audit logs.
+
+PART 4 — CITIZEN DASHBOARD
+
+Create a personalized dashboard.
+
+Display:
+
+Actual user's name.
+
+Actual uploaded profile photograph.
+
+Profile completion.
+
+Quick service shortcuts.
+
+My Reports.
+
+Emergency Services.
+
+Seva Shield.
+
+Medical Assistance.
+
+Accident Reporting.
+
+City Map.
+
+Notifications.
+
+Citizen Rewards.
+
+Profile Settings.
+
+Quick action cards
+
+Report a Civic Issue.
+
+Medical Assistance.
+
+Report a Road Accident.
+
+Women Safety.
+
+Emergency SOS.
+
+Track My Report.
+
+Every action must open its actual functional module.
+
+Personalized experience
+
+Display only the logged-in citizen's own private profile, emergency contacts, notifications and personal history.
+
+Citizens must be able to see all reports they personally submitted and track each report independently.
+
+Do not insert sample profiles or fake statistics.
+
+PART 5 — SMART CIVIC REPORTING
+
+Create a complete civic issue reporting system.
+
+Categories
+
+A. Roads and Potholes
+
+Potholes.
+
+Damaged roads.
+
+Broken footpaths.
+
+Dangerous road surfaces.
+
+B. Waste Management
+
+Garbage accumulation.
+
+Overflowing dustbins.
+
+Illegal dumping.
+
+Uncollected garbage.
+
+C. Drainage and Waterlogging
+
+Blocked drains.
+
+Sewage overflow.
+
+Waterlogging.
+
+Damaged drainage systems.
+
+D. Traffic and Road Obstructions
+
+Traffic congestion.
+
+Illegal parking.
+
+Road blockages.
+
+Other obstructions.
+
+E. Medical Assistance
+
+Medical emergencies.
+
+Injured persons.
+
+Ambulance assistance.
+
+Urgent medical support.
+
+F. Women and Child Safety
+
+Harassment.
+
+Unsafe public locations.
+
+Suspicious activities.
+
+Emergency assistance.
+
+Animals and Rescue must not appear as categories. All legacy references, if any are imported, must be migrated to Medical Assistance.
+
+Report submission form
+
+Fields:
+
+Category.
+
+Incident title.
+
+Description.
+
+Severity.
+
+Photograph.
+
+Video evidence.
+
+Current location.
+
+Date and time.
+
+Contact information.
+
+Generate a unique report ID for every submission.
+
+Report workflow
+
+Select category.
+
+Enter incident details.
+
+Capture or upload evidence.
+
+Obtain location permission.
+
+Capture actual coordinates.
+
+Run AI analysis if configured.
+
+Allow the user to review suggested details.
+
+Submit report.
+
+Save report and evidence to the database.
+
+Route the report to the appropriate authority.
+
+Notify the citizen.
+
+Display the report in the citizen's tracking dashboard.
+
+Display the same report in the Authority Dashboard.
+
+Allow the authority to investigate and update its status.
+
+Notify the citizen about every important status change.
+
+Provide a separate Report New Issue action for every category.
+
+Actual report image requirement
+
+This is mandatory:
+
+Show the photograph actually uploaded or captured by the citizen.
+
+Save the original uploaded image securely.
+
+Associate the image with the correct report ID.
+
+Display the actual image in the citizen's report history.
+
+Display the same authorized evidence in the Authority Dashboard.
+
+Allow authorized officers to open and inspect the evidence.
+
+Preserve the image when the report is updated.
+
+Support multiple photographs where appropriate.
+
+Never display a demo photograph, random image, stock image or placeholder as the evidence for a real report.
+
+If the user has not uploaded a photograph, display a clear "No photograph attached" message instead of inserting a fake image.
+
+PART 6 — REAL CAMERA, PHOTO AND VIDEO UPLOADS
+
+Implement actual camera and gallery functionality.
+
+Photographs
+
+Capture using device camera.
+
+Select from gallery.
+
+Preview actual photograph.
+
+Retake.
+
+Delete before submission.
+
+Upload to private storage.
+
+Display actual uploaded image in report details.
+
+Videos
+
+Record video where supported.
+
+Upload video from device.
+
+Preview.
+
+Display upload progress.
+
+Validate file type.
+
+Limit duration.
+
+Limit file size.
+
+Handle failed uploads.
+
+Suggested configurable limits:
+
+Photo: 10 MB.
+
+Video: 50 MB.
+
+Video duration: 60 seconds.
+
+Privacy
+
+Store media securely.
+
+Only the uploader and authorized officers may access sensitive evidence.
+
+Store media metadata, upload timestamp, report association and consented location metadata.
+
+Never use placeholder or stock photographs as actual report evidence.
+
+PART 7 — AI CIVIC INTELLIGENCE ENGINE
+
+Create an AI-powered report analysis module.
+
+Features
+
+Image-based incident classification.
+
+Automatic report category suggestions.
+
+Natural-language description analysis.
+
+Severity recommendations.
+
+Duplicate incident detection.
+
+Incident summarization.
+
+Smart department recommendations.
+
+Civic issue trend analysis.
+
+Example
+
+A citizen uploads a pothole photograph.
+
+The AI:
+
+Analyzes the image.
+
+Identifies a likely pothole.
+
+Suggests Roads and Potholes.
+
+Recommends severity.
+
+Generates a suggested description.
+
+Lets the citizen review and edit.
+
+Submits only after confirmation.
+
+AI must not independently verify allegations or make enforcement decisions.
+
+If the AI provider is unavailable, normal manual reporting must continue working.
+
+PART 8 — SEVA SHIELD: ADVANCED WOMEN SAFETY
+
+Build a dedicated module called:
+
+SEVA SHIELD — Your Personal Safety & Emergency Companion.
+
+This should be one of the most polished and practical parts of the application.
+
+Dashboard
+
+Display:
+
+Emergency SOS.
+
+Emergency contacts.
+
+Live location sharing.
+
+Voice protection.
+
+Nearby police stations.
+
+Safety status.
+
+Emergency history.
+
+Caregiver connection.
+
+Emergency contacts
+
+Allow up to five contacts.
+
+Fields:
+
+Name.
+
+Mobile number.
+
+Relationship.
+
+Rules:
+
+Validate Indian phone numbers.
+
+Prevent duplicates.
+
+Do not allow adding the user's own number.
+
+Enforce five-contact limit on backend and frontend.
+
+Allow adding, editing and deleting.
+
+Obtain consent to notify contacts with location information.
+
+SOS activation
+
+Create a large red SOS button.
+
+Workflow:
+
+Press and hold for two seconds.
+
+Show a five-second countdown.
+
+Display a cancel option.
+
+Activate emergency if not cancelled.
+
+Capture current location.
+
+Start active location tracking.
+
+Notify emergency contacts.
+
+Notify authorized police control room where configured.
+
+Display actual alert delivery statuses.
+
+Display the active emergency in the Authority Dashboard.
+
+SOS website notification — mandatory
+
+When a citizen activates SOS, notifications must appear inside the SEVA AI website as well.
+
+Implement:
+
+An immediate SOS notification in the citizen dashboard.
+
+An active emergency card.
+
+A notification in the caregiver's SEVA AI account, where the caregiver is registered and linked.
+
+A notification in the authorized Authority Dashboard.
+
+Real-time updates through WebSockets or an equivalent real-time service.
+
+A timestamp for every notification.
+
+Read/unread status.
+
+Acknowledgment status.
+
+Delivery status.
+
+Retry option for failed external notifications.
+
+If the caregiver is not currently logged in, preserve the notification for their next login and send an external alert through the configured SMS/email provider.
+
+Do not rely exclusively on browser notifications. Use the actual backend notification system.
+
+Alarm
+
+Play a loud alarm on the user's device after activation, subject to browser audio permissions.
+
+Allow stopping the alarm.
+
+SMS emergency alert
+
+Send actual SMS to saved contacts.
+
+Suggested message:
+
+"EMERGENCY: [User name] needs help. Current location: [Secure map link]. Last updated: [Timestamp]. Please contact them immediately."
+
+Show:
+
+Recipient.
+
+Sending.
+
+Sent.
+
+Failed.
+
+Retrying.
+
+Never show false success states.
+
+Caregiver notification and connection
+
+Create a proper caregiver connection system.
+
+Requirements:
+
+Citizens can add and verify caregiver phone numbers.
+
+Citizens can select trusted caregivers.
+
+Obtain consent before sharing location.
+
+Notify caregivers when SOS is activated.
+
+Send an actual SMS containing the emergency alert and secure location link.
+
+Show the alert in the caregiver's website notification center when they have an account.
+
+Show emergency type, citizen name, alert timestamp and last available location.
+
+Update the caregiver's tracking page as new GPS information arrives.
+
+Notify caregivers when the emergency is acknowledged.
+
+Notify caregivers when the citizen selects "I'm Safe".
+
+Notify caregivers when tracking ends.
+
+Maintain delivery history.
+
+Do not display a caregiver notification as delivered unless the corresponding delivery mechanism confirms it.
+
+I'm Safe
+
+Provide a prominent I'm Safe button.
+
+When selected:
+
+Stop alarm.
+
+Stop active location tracking.
+
+Update emergency state.
+
+Notify emergency contacts.
+
+Notify receiving authority.
+
+Notify caregivers.
+
+Record resolution time.
+
+SOS history
+
+Store:
+
+Emergency ID.
+
+Start timestamp.
+
+Location history.
+
+Recipients.
+
+Delivery results.
+
+Authority acknowledgment.
+
+Safe confirmation.
+
+Resolution status.
+
+PART 9 — REAL LIVE GPS LOCATION ENGINE
+
+THIS IS ONE OF THE MOST IMPORTANT REQUIREMENTS. IMPLEMENT IT PROPERLY.
+
+Build a reusable live location service shared across:
+
+Seva Shield.
+
+Medical Assistance.
+
+Accident Reporting.
+
+Nearby Places.
+
+Caregiver Tracking.
+
+SOS.
+
+Citizen reporting.
+
+Emergency Authority Dashboard.
+
+Do not use hardcoded coordinates, random coordinates, simulated location movement or demo locations.
+
+Actual GPS detection
+
+Use the browser Geolocation API:
+
+navigator.geolocation.watchPosition()
+
+Configure:
+
+enableHighAccuracy: true.
+
+maximumAge: 0.
+
+Sensible timeout.
+
+Permission handling.
+
+Automatic cleanup.
+
+Capture:
+
+Latitude.
+
+Longitude.
+
+Accuracy.
+
+Timestamp.
+
+Heading where available.
+
+Speed where available.
+
+Update location approximately every 3–5 seconds during active sessions, depending on device capabilities, GPS availability, network and battery constraints.
+
+Do not artificially move the location marker.
+
+Location states
+
+Display accurate states:
+
+Requesting permission.
+
+Obtaining GPS.
+
+Improving accuracy.
+
+Location acquired.
+
+Weak GPS.
+
+Permission denied.
+
+GPS unavailable.
+
+Network disconnected.
+
+Last known location.
+
+Display actual accuracy in meters.
+
+Do not claim a location is accurate if the reported accuracy is poor.
+
+If precise location is unavailable, clearly explain the problem and allow the user to retry.
+
+Never silently substitute a default city location or sample coordinates.
+
+Proper location permission flow
+
+When a citizen opens a location-dependent feature:
+
+Request location permission.
+
+Explain why location is required.
+
+Start actual GPS sensing.
+
+Wait for a real coordinate response.
+
+Validate the accuracy.
+
+Display the user's actual location on the map.
+
+Use these coordinates for nearby searches.
+
+Update the location during active tracking.
+
+Stop tracking when the user ends the session or consent is revoked.
+
+Use HTTPS and handle Android browser permission behaviour correctly.
+
+Caregiver tracking
+
+Allow users to authorize selected caregivers.
+
+When an active tracking session begins:
+
+Notify the caregiver.
+
+Send a secure tracking link.
+
+Share initial location.
+
+Update location through a real-time connection.
+
+Show last updated time.
+
+Notify when GPS is unavailable.
+
+Notify when tracking ends.
+
+Use WebSockets or equivalent real-time transport for location updates.
+
+Use SMS/email for important events, not repeated SMS every few seconds.
+
+Secure tracking page
+
+Generate a unique, unguessable tracking URL.
+
+The recipient can open it without installing the app.
+
+Display:
+
+Moving location marker.
+
+Actual map.
+
+Timestamp.
+
+Accuracy.
+
+Sharing status.
+
+Require user consent.
+
+Apply expiry, access revocation and privacy protection.
+
+Important browser limitation
+
+Clearly inform users that browser-based GPS and voice recognition cannot guarantee continuous operation when the browser is closed or the device is locked.
+
+Do not claim uninterrupted background tracking unless a properly supported native or platform-level implementation exists.
+
+PART 10 — NEARBY LOCATION INTELLIGENCE
+
+Nearby places must be calculated using the user's actual live GPS location only.
+
+Do not display demo locations, default city locations, fabricated facilities or hardcoded coordinates.
+
+Implement a real nearby places engine.
+
+Nearby places must include
+
+Hospitals.
+
+Clinics.
+
+Police stations.
+
+Ambulance providers.
+
+Shopping malls.
+
+Restaurants.
+
+Public places.
+
+Metro stations.
+
+Bus stations.
+
+Pharmacies.
+
+Emergency facilities.
+
+Other relevant public locations.
+
+Use a real places provider such as Google Places or OpenStreetMap.
+
+Mandatory search workflow
+
+Request current GPS permission.
+
+Detect actual latitude and longitude.
+
+Verify location accuracy.
+
+Send actual coordinates to the nearby places API.
+
+Search for real facilities around those coordinates.
+
+Retrieve actual provider results.
+
+Calculate geographic distance.
+
+Sort results by distance.
+
+Display the closest places first.
+
+Display actual details and navigation links.
+
+Every nearby search must use the latest valid location.
+
+If the user moves, refresh the nearby results using the updated GPS position.
+
+Display for every place
+
+Actual facility name.
+
+Actual address.
+
+Distance from the user's current location.
+
+Phone number where available.
+
+Opening status where reliable.
+
+Navigation link.
+
+Map marker.
+
+Data source.
+
+Do not invent locations, distances, phone numbers, ratings or opening hours.
+
+Do not show a facility as nearby if it was not returned by the actual places provider.
+
+GPS failure behaviour
+
+If GPS permission is denied or coordinates cannot be obtained:
+
+Show a clear error.
+
+Provide a retry button.
+
+Explain that nearby places cannot be accurately calculated.
+
+Do not silently display demo locations.
+
+Do not substitute random or hardcoded coordinates.
+
+Allow manual location entry only as a clearly labelled alternative, never as an automatically detected live location.
+
+PART 11 — MEDICAL ASSISTANCE
+
+Build a complete Medical Assistance module.
+
+Workflow
+
+User selects Medical Assistance.
+
+Website requests location permission.
+
+Capture actual GPS coordinates.
+
+Display the detected location.
+
+User provides incident details.
+
+User provides phone number.
+
+System searches actual nearby hospitals and ambulance services.
+
+Calculate geographic distances.
+
+Display the nearest relevant facilities.
+
+Identify eligible receiving facilities.
+
+Send emergency request to configured backend.
+
+Trigger an actual call request or voice notification if configured.
+
+Display emergency request on authorized dashboard.
+
+Generate tracking ID.
+
+Notify the citizen.
+
+Allow the citizen to track response status.
+
+Nearby hospital and ambulance display
+
+Show only real facilities returned by the live location-based provider.
+
+Display:
+
+Hospital name.
+
+Actual address.
+
+Distance.
+
+Phone number.
+
+Navigation.
+
+Data source.
+
+Do not display fake hospital images or fabricated emergency availability.
+
+Medical status
+
+Received.
+
+Authority Notified.
+
+Acknowledged.
+
+Ambulance Assigned.
+
+On the Way.
+
+Resolved.
+
+Only show confirmed assignment and dispatch statuses after an actual authorized response.
+
+Call integration
+
+Use a configured server-side voice provider such as Twilio Voice.
+
+If not configured, clearly show that calling is unavailable and provide a legitimate manual emergency contact option.
+
+PART 12 — TRAFFIC AND ROAD ACCIDENT ASSISTANCE
+
+Create a dedicated accident assistance system.
+
+Features:
+
+Report accident.
+
+Capture actual GPS.
+
+Upload actual accident photographs.
+
+Upload video evidence.
+
+Provide incident details.
+
+Search nearby hospitals using current GPS.
+
+Search nearby police stations using current GPS.
+
+Provide navigation.
+
+Notify relevant emergency authority.
+
+Generate tracking ID.
+
+Track response.
+
+Mandatory nearby accident assistance workflow
+
+When an accident is reported:
+
+Detect the user's actual live location.
+
+Obtain current GPS coordinates.
+
+Search nearby hospitals using those coordinates.
+
+Search nearby police stations using those coordinates.
+
+Display actual facilities sorted by distance.
+
+Display their actual addresses and contact details where available.
+
+Provide navigation links.
+
+Send the accident report and location to the authorized emergency dashboard.
+
+Notify the citizen of the request status.
+
+Never display demo hospitals, demo police stations or facilities from a different location.
+
+Traffic intelligence
+
+Integrate actual traffic data when a provider is available.
+
+Display real traffic conditions, source and update time.
+
+Do not generate fake congestion or traffic reports.
+
+PART 13 — VOICE-ACTIVATED EMERGENCY PROTECTION
+
+Implement browser-based voice recognition.
+
+Use Web Speech API where supported.
+
+Controls
+
+Start Voice Protection.
+
+Stop Voice Protection.
+
+Visible Listening status.
+
+Microphone permission.
+
+Language selection.
+
+Supported trigger phrases:
+
+English: "Help me Seva"
+
+Hindi: "Seva madad karo"
+
+Allow user customization.
+
+When a phrase is recognized:
+
+Activate the same five-second SOS countdown.
+
+Display a cancellation option.
+
+Trigger SOS only if not cancelled.
+
+Support en-IN and hi-IN.
+
+Handle recognition interruptions and unsupported browsers gracefully.
+
+Clearly explain that browser voice recognition is not guaranteed to run in the background or when the phone is locked.
+
+PART 14 — SMART AUTHORITY ROUTING
+
+Create an intelligent routing engine.
+
+Category	Authority
+Roads	Public Works Department
+Waste	Municipal Waste Department
+Drainage	Drainage Department
+Traffic	Traffic Police
+Accident	Emergency Control Room
+Medical	Nearest eligible medical facility
+Women Safety	Police Control Room
+Harassment/Crime	Appropriate Police Authority
+Use:
+
+Category.
+
+Current coordinates.
+
+Jurisdiction.
+
+Actual facility location.
+
+Distance.
+
+Availability information where supported.
+
+Emergency priority.
+
+Automatic escalation
+
+If an authority does not acknowledge an emergency within a configurable period, such as 60 seconds:
+
+Escalate to the next eligible authority.
+
+Notify the original authority.
+
+Record timestamps.
+
+Maintain an escalation history.
+
+Do not claim that an authority has accepted or dispatched a response without confirmation.
+
+PART 15 — AUTHORITY PORTAL: COMPLETE REPORT MANAGEMENT SYSTEM
+
+THIS IS A CRITICAL REQUIREMENT. THE AUTHORITY DASHBOARD MUST BE FULLY CONNECTED TO THE CITIZEN REPORTING SYSTEM.
+
+Create a completely separate Authority Portal.
+
+The Authority Dashboard must receive and display actual reports submitted by citizens through the backend database.
+
+A. Authority Dashboard overview
+
+Display real database information:
+
+Total incoming citizen reports.
+
+Pending reports.
+
+Assigned reports.
+
+Reports under investigation.
+
+In-progress reports.
+
+Resolved reports.
+
+Rejected reports.
+
+Medical emergencies.
+
+Active SOS alerts.
+
+Accident alerts.
+
+Escalated emergencies.
+
+All numbers must come from actual database queries.
+
+Never use fabricated statistics.
+
+B. Remove the permission feature
+
+Remove the separate report permission-request and report-access approval feature from the Authority Dashboard.
+
+Do not require an authority officer to request permission to view citizen reports.
+
+After successful authority authentication:
+
+All citizen-submitted reports must be visible in the central Authority Dashboard.
+
+All report categories must be accessible.
+
+All incoming reports must appear automatically.
+
+Newly submitted reports must appear without manual refresh wherever real-time connections are supported.
+
+Officers must be able to open and inspect report details.
+
+Officers must be able to update report status and record actions.
+
+Officers must be able to resolve reports.
+
+Maintain secure authority authentication, but do not introduce a separate permission-request workflow that blocks access to the reports.
+
+C. Complete citizen report visibility
+
+Every citizen report submitted successfully must automatically appear in the Authority Dashboard.
+
+For every report, display:
+
+Unique report ID.
+
+Citizen name.
+
+Citizen's verified phone number where authorized.
+
+Citizen contact details.
+
+Category.
+
+Incident title.
+
+Full incident description.
+
+Severity.
+
+Actual uploaded photograph.
+
+Actual uploaded video where available.
+
+Actual location.
+
+Latitude and longitude.
+
+Map location.
+
+Submission date.
+
+Submission time.
+
+Current report status.
+
+Assigned department.
+
+Assigned officer.
+
+Report history.
+
+Citizen-provided contact information.
+
+AI-generated suggestions, clearly labelled as suggestions.
+
+Do not show a generic placeholder instead of report information.
+
+Do not show a demo image instead of the citizen's uploaded image.
+
+When a citizen uploads an image, the Authority Dashboard must display that exact uploaded image associated with the correct report.
+
+D. Detailed report inspection
+
+When an authority officer opens a report, show a dedicated full report detail page.
+
+The officer must be able to:
+
+View the entire report.
+
+Open actual uploaded evidence.
+
+View the map location.
+
+View citizen contact information where authorized.
+
+Review the issue category and severity.
+
+Review submission date and time.
+
+Review report status history.
+
+Add investigation notes.
+
+Assign the report to the relevant department or officer.
+
+Update the report status.
+
+Upload resolution photographs.
+
+Add a resolution description.
+
+Mark the issue as resolved.
+
+Reopen a report if necessary.
+
+Record the reason for rejection.
+
+All actions must update the backend database.
+
+E. Authority report workflow
+
+Implement the following functional status lifecycle:
+
+SUBMITTED → RECEIVED → UNDER REVIEW → ASSIGNED → IN PROGRESS → RESOLVED.
+
+Additional states:
+
+REJECTED.
+
+REOPENED.
+
+ESCALATED.
+
+Each status change must record:
+
+Report ID.
+
+Previous status.
+
+New status.
+
+Updated by.
+
+Timestamp.
+
+Action note.
+
+Evidence where applicable.
+
+Do not allow a report to be marked resolved without recording the resolution details.
+
+F. Authority dashboard filters
+
+Provide functional filters:
+
+Category.
+
+Severity.
+
+Date.
+
+Status.
+
+Department.
+
+Ward or area.
+
+Report ID.
+
+Add working search functionality.
+
+G. Department handling
+
+Ensure the Department Management and department assignment features work properly.
+
+Departments must load dynamically from the database.
+
+The authority officer must be able to view relevant department information and assign reports appropriately.
+
+Do not use a hardcoded department dropdown that fails to load or save.
+
+H. Authority notifications
+
+When a new report is submitted:
+
+Create a real notification.
+
+Display it inside the Authority Dashboard.
+
+Update the incoming report count.
+
+Show the report category and severity.
+
+Show the submission timestamp.
+
+Provide a direct link to report details.
+
+For urgent reports, show a prominent alert.
+
+I. Emergency control center
+
+Provide:
+
+Live SOS alerts.
+
+Medical emergency alerts.
+
+Accident alerts.
+
+Live location map.
+
+Emergency acknowledgment.
+
+Assigned officer.
+
+Escalation controls.
+
+Resolution records.
+
+J. Authority sound notification
+
+When a new high-priority emergency arrives:
+
+Play an alert sound when the dashboard has permission.
+
+Display a prominent alert.
+
+Show the emergency type.
+
+Show timestamp.
+
+Show authorized location information.
+
+Allow acknowledgment.
+
+Avoid repeated sound after acknowledgment.
+
+K. Administrative modules
+
+User Management.
+
+Authority Management.
+
+Department Management.
+
+Report Verification.
+
+Emergency Management.
+
+Privacy and DPDP Hub.
+
+Admin Control Center.
+
+Analytics.
+
+Keep the dashboard clean and avoid duplicate administrative tools.
+
+PART 16 — CITIZEN REPORT TRACKING SYSTEM
+
+Every citizen must be able to track every report they have submitted.
+
+Build a dedicated My Reports and Track My Report experience.
+
+Citizen report dashboard
+
+Display all reports belonging to the logged-in citizen.
+
+For each report, show:
+
+Report ID.
+
+Issue title.
+
+Category.
+
+Actual uploaded image.
+
+Submission date.
+
+Submission time.
+
+Location.
+
+Current status.
+
+Assigned department.
+
+Last updated timestamp.
+
+Authority action notes where appropriate.
+
+Resolution information.
+
+Live status tracking
+
+Whenever the authority updates a report, the citizen's dashboard must reflect the change.
+
+Use real-time updates through WebSockets or an equivalent technology where available.
+
+The citizen must not need to submit the same report again to learn its status.
+
+Tracking timeline
+
+Display a clear timeline:
+
+Report Submitted.
+
+Report Received.
+
+Under Review.
+
+Department Assigned.
+
+Work in Progress.
+
+Issue Resolved.
+
+Display the actual timestamp for every completed stage.
+
+If the report is rejected, display the rejection reason.
+
+If the report is reopened, display the reason and updated timeline.
+
+Report detail page
+
+Allow the citizen to open any submitted report and see:
+
+Complete report information.
+
+Original uploaded image.
+
+Current status.
+
+Status timeline.
+
+Department information.
+
+Authority action notes.
+
+Resolution photograph where available.
+
+Resolution description.
+
+Contact/support information.
+
+Do not display fabricated progress.
+
+A status must only change after an actual backend update by an authorized authority user.
+
+Notifications to citizens
+
+Send a website notification whenever:
+
+A report is submitted.
+
+A report is received.
+
+A report is reviewed.
+
+A department is assigned.
+
+Work begins.
+
+The authority requests additional information.
+
+A report is rejected.
+
+A report is resolved.
+
+A report is reopened.
+
+Send SMS/email updates when configured and consented to.
+
+PART 17 — CITY CRIME & SAFETY HEATMAP
+
+Keep a dedicated section called:
+
+City Crime & Safety Heatmap
+
+Build it from actual administrator-approved incidents.
+
+Data sources
+
+Verified harassment reports.
+
+Verified crime reports.
+
+Approved unsafe-area reports.
+
+Filters
+
+Incident type.
+
+Day/night.
+
+Date range.
+
+Ward/area.
+
+Risk calculation
+
+Weight reports using:
+
+Severity.
+
+Recency.
+
+Geographic density.
+
+Verification status.
+
+Legend
+
+Low reported risk.
+
+Moderate reported risk.
+
+High reported risk.
+
+Show last updated time.
+
+Privacy
+
+Only admin-approved reports.
+
+No reporter identities.
+
+No sensitive case details.
+
+Aggregate locations where appropriate.
+
+Suppress sparse data.
+
+Never claim that an area is absolutely safe.
+
+PART 18 — CITIZEN BADGES AND POINTS
+
+Create a transparent civic recognition system.
+
+Badge levels
+
+Badge	Verified reports
+Bronze Citizen	1+
+Silver Citizen	10+
+Gold Citizen	25+
+Platinum Guardian	50+
+Allow admin-configurable thresholds.
+
+Special badges
+
+First Report.
+
+First Medical Assistance Report.
+
+Consistent Reporter.
+
+Safety Hero.
+
+Consistent Reporter requires verified reports in three different calendar months.
+
+Safety Hero requires a verified report contributing to a confirmed resolved police or ambulance action.
+
+Points
+
+Configurable points for:
+
+Verified reports.
+
+Photo/video evidence.
+
+Accurate location.
+
+Resolved reports.
+
+Helpful medical assistance.
+
+Implement:
+
+Daily point limits.
+
+Duplicate detection.
+
+Admin verification.
+
+False-report penalties.
+
+Points history.
+
+Badge audit log.
+
+Rejected, fake and duplicate reports must not earn points.
+
+PART 19 — LEADERBOARD
+
+Create a dedicated leaderboard page.
+
+Tabs:
+
+This Month.
+
+This Year.
+
+All Time.
+
+Area/Ward.
+
+Show:
+
+Rank.
+
+Display name.
+
+Anonymous Citizen option.
+
+Badge.
+
+Verified reports.
+
+Points.
+
+Show the logged-in user's own rank.
+
+Never use fake users or fabricated scores.
+
+Never expose sensitive-case reporters.
+
+PART 20 — ANNUAL AWARD AND HALL OF FAME
+
+Create the annual award:
+
+MOST SOCIALLY ALERT CITIZEN
+
+At year-end:
+
+Calculate genuine eligible rankings.
+
+Shortlist three to five candidates.
+
+Show verified reports.
+
+Allow admin investigation.
+
+Allow disqualification with recorded reason.
+
+Confirm the final winner.
+
+Winner announcement
+
+With consent:
+
+Homepage banner.
+
+Winner profile card.
+
+Email notification.
+
+In-app notification.
+
+Downloadable PDF certificate.
+
+The certificate should include:
+
+Winner name.
+
+Year.
+
+Award title.
+
+SEVA AI branding.
+
+Authorized city authority branding.
+
+Hall of Fame
+
+Display actual confirmed past winners by year.
+
+Never invent winners.
+
+PART 21 — CENTRALIZED NOTIFICATION SYSTEM
+
+Implement a centralized notification engine.
+
+Citizen notifications
+
+Registration.
+
+OTP.
+
+Report submission.
+
+Report acknowledgment.
+
+Assignment.
+
+Authority status updates.
+
+Resolution.
+
+SOS delivery.
+
+Caregiver tracking.
+
+Emergency closure.
+
+Badge earned.
+
+Leaderboard.
+
+Awards.
+
+Authority notifications
+
+Incoming reports.
+
+Emergency requests.
+
+Medical alerts.
+
+Police alerts.
+
+Escalations.
+
+Pending reports.
+
+Resolution requests.
+
+Caregiver notifications
+
+SOS activated.
+
+Emergency location shared.
+
+Tracking started.
+
+Location update unavailable.
+
+Emergency acknowledged.
+
+Citizen marked safe.
+
+Tracking ended.
+
+Notification channels
+
+In-app website notifications.
+
+SMS.
+
+Email.
+
+Browser push notifications where supported.
+
+WhatsApp when officially configured.
+
+Website notification requirements
+
+Every important event must be recorded in the backend notification database.
+
+Implement:
+
+Notification center.
+
+Unread count.
+
+Read/unread status.
+
+Timestamp.
+
+Notification category.
+
+Direct navigation to relevant report or emergency.
+
+Real-time notification delivery.
+
+Retry mechanism for failed external delivery.
+
+For SOS alerts, the caregiver must receive both an in-website notification when connected to SEVA AI and an actual external notification through the configured SMS/email provider.
+
+Track actual delivery status.
+
+Never display a successful notification if the provider returned failure.
+
+PART 22 — USER PROFILE
+
+Create a personalized profile page.
+
+Fields:
+
+Actual full name.
+
+Actual profile photo.
+
+Email.
+
+Mobile number.
+
+Address or preferred area where voluntarily supplied.
+
+Emergency contacts.
+
+Notification preferences.
+
+Privacy settings.
+
+Badge.
+
+Verified report statistics.
+
+Report history.
+
+Allow:
+
+Edit profile.
+
+Upload profile photograph.
+
+Change password.
+
+Manage emergency contacts.
+
+Manage caregivers.
+
+Configure voice protection.
+
+Control privacy.
+
+Logout.
+
+Request account/data deletion.
+
+Display only information belonging to the logged-in user, except information legitimately available to authorized authorities for operational purposes.
+
+PART 23 — DATABASE AND BACKEND
+
+Use a robust, normalized database.
+
+Suggested tables:
+
+users
+
+user_profiles
+
+authority_accounts
+
+departments
+
+jurisdictions
+
+reports
+
+report_media
+
+report_locations
+
+assignments
+
+report_status_history
+
+emergency_contacts
+
+caregiver_permissions
+
+sos_events
+
+sos_location_updates
+
+tracking_sessions
+
+medical_requests
+
+facility_records
+
+emergency_notifications
+
+notifications
+
+otp_challenges
+
+citizen_points
+
+citizen_badges
+
+leaderboard_records
+
+annual_awards
+
+award_candidates
+
+certificates
+
+audit_logs
+
+consent_records
+
+Use appropriate relationships, geographic indexes, constraints and migrations.
+
+Backend requirements
+
+Implement actual CRUD operations.
+
+Connect every frontend form to its backend endpoint.
+
+Implement real database persistence.
+
+Validate all inputs server-side.
+
+Use database transactions where necessary.
+
+Implement proper error handling.
+
+Implement secure file uploads.
+
+Implement real-time event delivery.
+
+Implement report tracking.
+
+Implement notification persistence.
+
+Implement secure GPS update storage.
+
+Critical citizen-authority data connection
+
+The same report record must be used by:
+
+Citizen report submission.
+
+Citizen My Reports dashboard.
+
+Authority incoming reports.
+
+Authority report detail page.
+
+Authority status updates.
+
+Citizen tracking timeline.
+
+Citizen notifications.
+
+Do not create separate disconnected or duplicate report datasets.
+
+When an authority updates a report, the citizen must see the updated status from the same database record.
+
+Implement server-side ownership checks for every private resource.
+
+PART 24 — SECURITY AND DATA PROTECTION
+
+Implement:
+
+HTTPS.
+
+Secure authentication.
+
+Role-based access.
+
+Password hashing.
+
+OTP rate limiting.
+
+Server-side validation.
+
+Private media storage.
+
+Encrypted sensitive data.
+
+Secure tracking links.
+
+API authorization.
+
+Audit logs.
+
+Consent management.
+
+Data retention.
+
+Account deletion.
+
+Sensitive case protection.
+
+Follow applicable Indian data protection requirements, including the DPDP framework.
+
+Ensure that all authority accounts are authenticated before access.
+
+All citizen reports should be visible in the authenticated Authority Dashboard as required, while sensitive personal information and emergency details must be handled securely and disclosed only for legitimate operational purposes.
+
+PART 25 — REAL INTEGRATIONS
+
+Use actual services.
+
+Suggested integrations:
+
+Feature	Provider
+OTP SMS	MSG91 / Twilio
+OTP email	Resend / SendGrid
+Emergency SMS	MSG91 / Twilio
+Voice calls	Twilio Voice
+Maps	Google Maps / OpenStreetMap
+Nearby locations	Google Places / OSM
+Database	PostgreSQL + PostGIS
+File storage	S3-compatible private storage
+AI	Vision and language model APIs
+Real-time location	WebSockets
+Authentication	Firebase Auth / secure backend
+Phone number integration
+
+The citizen's registered mobile number must be stored and linked to their authenticated account.
+
+Use the verified phone number for consented SMS communication.
+
+Implement:
+
+Phone number validation.
+
+OTP verification.
+
+Phone number ownership verification.
+
+SMS delivery tracking.
+
+Resend handling.
+
+Failed delivery handling.
+
+Phone number update and re-verification.
+
+Never send sensitive information to an unverified phone number.
+
+SMS integration requirements
+
+Actual SMS must be sent through the configured provider.
+
+Use server-side credentials.
+
+For Indian SMS integrations, complete DLT registration and template approval where required.
+
+Implement provider callbacks/webhooks wherever available to record delivery status.
+
+Show:
+
+Queued.
+
+Sending.
+
+Accepted by provider.
+
+Delivered, where confirmed.
+
+Failed.
+
+Retry required.
+
+Do not confuse provider acceptance with confirmed delivery.
+
+If the provider is not configured, clearly identify the missing configuration rather than displaying a fake success message.
+
+GPS and places integration
+
+Use actual coordinates returned by the device's GPS.
+
+Do not use a predefined coordinate as a fallback.
+
+Nearby searches must be performed using the latest actual GPS coordinates.
+
+Credentials
+
+All credentials must be stored in server-side environment variables.
+
+Document all external account setup steps.
+
+Do not pretend integrations work without credentials.
+
+PART 26 — ERROR HANDLING AND RELIABILITY
+
+Every module must have:
+
+Loading states.
+
+Empty states.
+
+Success states.
+
+Error states.
+
+Retry options.
+
+Handle:
+
+Network loss.
+
+GPS permission denial.
+
+Weak GPS.
+
+SMS failure.
+
+Email failure.
+
+Database failure.
+
+Upload failure.
+
+Authentication expiry.
+
+Authority unavailability.
+
+Duplicate submissions.
+
+Real-time connection interruption.
+
+Places provider failure.
+
+Expired OTP.
+
+Incorrect OTP.
+
+Failed caregiver notification.
+
+SOS failure handling
+
+Retry failed notifications.
+
+Preserve last known location with its actual timestamp.
+
+Record all attempts.
+
+Queue pending requests securely where appropriate.
+
+Provide SMS app fallback where appropriate.
+
+Display actual delivery status.
+
+Never claim emergency dispatch without confirmation.
+
+Location failure handling
+
+If location sensing fails:
+
+Show the actual error.
+
+Allow retry.
+
+Display the last known location only if clearly labelled.
+
+Display its timestamp.
+
+Do not use a demo coordinate.
+
+Do not show nearby places based on an invented location.
+
+Backend failure handling
+
+If an API fails, do not leave the user with a permanently loading screen.
+
+Show a meaningful error and a retry action.
+
+Preserve unsaved form data where possible.
+
+PART 27 — PERFORMANCE AND RESPONSIVENESS
+
+Optimize the website for:
+
+Android phones.
+
+iPhones.
+
+Tablets.
+
+Laptops.
+
+Desktop computers.
+
+Use:
+
+Lazy loading.
+
+Optimized images.
+
+Efficient API calls.
+
+Pagination.
+
+Database indexing.
+
+Real-time connection management.
+
+Reasonable GPS update frequency.
+
+Battery-conscious tracking.
+
+Emergency screens must load quickly and remain easy to operate.
+
+Ensure that the website is responsive and fully usable on mobile devices.
+
+PART 28 — COMPLETE TESTING AND QUALITY ASSURANCE
+
+Do not test only the visual design. Test the entire application from frontend to backend.
+
+A. Authentication testing
+
+Test:
+
+Citizen registration.
+
+Authority login.
+
+Random OTP generation.
+
+Website-visible development OTP.
+
+Actual SMS OTP.
+
+Actual email OTP.
+
+Invalid OTP.
+
+Expired OTP.
+
+Resend OTP.
+
+OTP rate limiting.
+
+Password login.
+
+Forgot password.
+
+Logout.
+
+Session expiration.
+
+Unauthorized access prevention.
+
+B. Citizen reporting testing
+
+Test:
+
+All categories.
+
+Form validation.
+
+Camera.
+
+Gallery.
+
+Video.
+
+Actual image storage.
+
+Correct image displayed in report.
+
+GPS.
+
+Report submission.
+
+Report ID generation.
+
+Report tracking.
+
+Duplicate detection.
+
+C. Authority dashboard testing
+
+Test:
+
+Authority login.
+
+All citizen reports visible after login.
+
+No report permission-request screen.
+
+Correct report details.
+
+Actual uploaded photographs.
+
+Correct citizen contact information where authorized.
+
+Correct location.
+
+Department loading.
+
+Department assignment.
+
+Report filters.
+
+Search.
+
+Status updates.
+
+Action notes.
+
+Resolution evidence.
+
+Report resolution.
+
+Reopening.
+
+Audit history.
+
+Real-time incoming reports.
+
+D. Citizen tracking testing
+
+Test:
+
+Report appears in My Reports after submission.
+
+Correct report ID.
+
+Correct uploaded photograph.
+
+Correct status.
+
+Correct timeline.
+
+Authority status update reflected on citizen dashboard.
+
+Website notification received.
+
+SMS update where configured.
+
+Resolution details displayed.
+
+Reopened report displayed correctly.
+
+E. GPS testing
+
+Test on an actual Android phone and other supported devices.
+
+Verify:
+
+Real GPS permission.
+
+Actual latitude and longitude.
+
+Accuracy in meters.
+
+Location updates.
+
+Location change after movement.
+
+GPS denied.
+
+Weak GPS.
+
+GPS unavailable.
+
+Network interruption.
+
+Last known location.
+
+Tracking start.
+
+Tracking stop.
+
+Never mark GPS functionality as successfully tested using a simulated location.
+
+F. Nearby places testing
+
+Test:
+
+Current GPS detected.
+
+Actual nearby hospitals.
+
+Actual nearby police stations.
+
+Actual restaurants.
+
+Actual malls.
+
+Actual public places.
+
+Correct distances.
+
+Correct sorting.
+
+Correct map markers.
+
+Correct navigation links.
+
+Refresh after location changes.
+
+GPS failure handling.
+
+Places provider failure handling.
+
+Verify that no demo location appears.
+
+G. Medical and accident testing
+
+Test:
+
+Real GPS.
+
+Nearby facility search.
+
+Actual distance.
+
+Hospital display.
+
+Police station display.
+
+Actual image uploads.
+
+Notification delivery.
+
+Call request.
+
+Status tracking.
+
+Failure handling.
+
+H. Seva Shield and SOS testing
+
+Test:
+
+Emergency contacts.
+
+SOS countdown.
+
+Cancellation.
+
+Alarm.
+
+Actual SMS.
+
+Website SOS notification.
+
+Caregiver notification.
+
+Authority notification.
+
+Live location.
+
+Secure tracking link.
+
+Real-time location update.
+
+I'm Safe.
+
+Tracking termination.
+
+Voice trigger in English and Hindi.
+
+Unsupported browser.
+
+Weak GPS.
+
+Offline handling.
+
+Failed SMS retry.
+
+I. Notification testing
+
+Test:
+
+In-app notification.
+
+Website notification center.
+
+Caregiver website notification.
+
+Authority notification.
+
+SMS.
+
+Email.
+
+Read/unread status.
+
+Delivery status.
+
+Retry.
+
+Real-time updates.
+
+J. Leaderboard and citizen recognition testing
+
+Test:
+
+Badge thresholds.
+
+Verified report counting.
+
+Points.
+
+Anonymous profiles.
+
+Leaderboard.
+
+Annual award.
+
+Certificate generation.
+
+K. Final quality checks
+
+No dead buttons.
+
+No broken links.
+
+No console errors.
+
+No demo users.
+
+No demo reports.
+
+No demo photographs.
+
+No fake profile pictures.
+
+No demo coordinates.
+
+No fake delivery confirmations.
+
+No fake nearby locations.
+
+No fake notifications.
+
+No disconnected frontend/backend modules.
+
+No cross-user data leakage.
+
+No unauthorized dashboard access.
+
+No incorrect report status.
+
+No fabricated resolution.
+
+No fake GPS accuracy.
+
+No false SMS delivery status.
+
+Test actual GPS on a real phone and actual SMS/email integrations.
+
+Do not claim that an integration is working unless it has been tested against the actual service.
+
+PART 29 — DEVELOPMENT EXECUTION PLAN
+
+Build in these stages.
+
+Stage 1: Project setup, branding, database and authentication.
+
+Stage 2: Citizen dashboard and profile.
+
+Stage 3: Authority dashboard and complete report visibility.
+
+Stage 4: Civic reporting and secure media uploads.
+
+Stage 5: Shared GPS service and live nearby places.
+
+Stage 6: Medical Assistance and accident response.
+
+Stage 7: Seva Shield, SOS, caregiver tracking and voice protection.
+
+Stage 8: Authority routing, escalation and notifications.
+
+Stage 9: Citizen report tracking and real-time status updates.
+
+Stage 10: Crime & Safety Heatmap.
+
+Stage 11: Citizen badges, points, leaderboard and annual awards.
+
+Stage 12: SMS/email integration, security and complete QA.
+
+Do not move on while critical integration errors from an earlier stage remain unresolved.
+
+FINAL DELIVERABLE
+
+Deliver a complete working SEVA AI application.
+
+It must include:
+
+Professional landing page.
+
+Citizen authentication.
+
+Authority authentication.
+
+Random OTP generation.
+
+Website-visible OTP in development/testing mode.
+
+Actual SMS OTP in production.
+
+Actual email OTP.
+
+Password login and recovery.
+
+Citizen dashboard.
+
+Authority dashboard.
+
+All citizen reports visible to authenticated authority users.
+
+Complete report details.
+
+Actual uploaded report photographs.
+
+Actual photo/video uploads.
+
+AI report analysis.
+
+Real GPS.
+
+Accurate live location sensing.
+
+Nearby hospitals.
+
+Nearby police stations.
+
+Nearby malls and restaurants.
+
+Nearby public places.
+
+Medical Assistance.
+
+Accident Assistance.
+
+Seva Shield.
+
+Emergency contacts.
+
+SOS.
+
+Alarm.
+
+Website SOS notifications.
+
+Caregiver notifications.
+
+Authority notifications.
+
+Live location sharing.
+
+Voice protection.
+
+Authority routing.
+
+Emergency escalation.
+
+Citizen report tracking.
+
+Live report status updates.
+
+Resolution evidence.
+
+Crime & Safety Heatmap.
+
+Citizen badges.
+
+Points.
+
+Leaderboard.
+
+Annual awards.
+
+Hall of Fame.
+
+Notification center.
+
+Secure database.
+
+Actual SMS integration.
+
+Actual email integration.
+
+README.
+
+Environment configuration.
+
+Testing documentation.
+
+Provide a final implementation report listing:
+
+Features implemented.
+
+Features tested successfully.
+
+Files created.
+
+Integrations connected.
+
+Database migrations.
+
+External configuration still required.
+
+Known limitations.
+
+Any feature that could not be completed and the exact reason.
+
+ABSOLUTE NON-NEGOTIABLE RULES
+
+Build a real application, not a theoretical website.
+
+No demo users.
+
+No demo reports.
+
+No demo photographs.
+
+No fake profile pictures.
+
+No fake coordinates.
+
+No random GPS movement.
+
+No fabricated nearby facilities.
+
+No fabricated statistics.
+
+No fake notifications.
+
+No fake SMS delivery.
+
+No fake emergency dispatch.
+
+No disconnected buttons.
+
+No exposed API credentials.
+
+No unauthorized user data access.
+
+No public exposure of sensitive safety reports.
+
+No inaccurate GPS claims.
+
+No fabricated leaderboard entries.
+
+No fake success states.
+
+No fake report resolution.
+
+No fake location sensing.
+
+No demo locations in nearby places.
+
+No placeholder image in an actual citizen report.
+
+No disconnected authority and citizen dashboards.
+
+No permission-request feature blocking authorities from viewing citizen reports.
+
+Every citizen report must be visible in the Authority Dashboard after successful authority login.
+
+Every citizen must be able to track their own submitted reports.
+
+Every authority status update must reflect in the citizen's tracking dashboard.
+
+Every SOS must create a real website notification for connected caregivers and authorities, alongside configured external notifications.
+
+Every location-dependent feature must use actual GPS coordinates.
+
+Every nearby place must be retrieved using the user's actual current location.
+
+Every SMS must use an actual configured provider.
+
+Every feature must be tested against its actual backend implementation.
+
+Prioritize REAL FUNCTIONALITY > SECURITY > RELIABILITY > ACCURATE LOCATION > TRANSPARENCY > USER EXPERIENCE > VISUAL EFFECTS.
+
+THE FINAL VISION
+
+SEVA AI should not feel like another complaint-reporting website.
+
+It should feel like an intelligent city companion that helps citizens solve everyday problems, access emergency assistance, stay connected to trusted caregivers and communicate with the right authorities.
+
+A citizen should be able to report an issue in seconds, attach real evidence, share an accurate location, receive a unique tracking ID and follow the entire resolution journey.
+
+An authority officer should be able to log in, see all submitted citizen reports, inspect the actual evidence, understand the location, update the report and record the resolution.
+
+A person facing an emergency should be able to activate SOS, share their real-time location and notify caregivers through both the website and configured external communication channels.
+
+The platform must connect every step instead of presenting disconnected features.
+
+It should make the work of authorities more organized, improve transparency, support public safety and create measurable civic participation.
+
+SEVA AI — A Smarter City Begins With You.
